@@ -34,9 +34,6 @@ class Evenement
     #[ORM\JoinColumn(nullable: false)]
     private $id_categorie;
 
-    #[ORM\OneToMany(mappedBy: 'evenement', targetEntity: Utilisateur::class)]
-    private $id_utilisateur;
-
     #[ORM\OneToMany(mappedBy: 'id_evenement', targetEntity: Appreciation::class)]
     private $appreciations;
 
@@ -123,35 +120,6 @@ class Evenement
         return $this;
     }
 
-    /**
-     * @return Collection<int, Utilisateur>
-     */
-    public function getIdUtilisateur(): Collection
-    {
-        return $this->id_utilisateur;
-    }
-
-    public function addIdUtilisateur(Utilisateur $idUtilisateur): self
-    {
-        if (!$this->id_utilisateur->contains($idUtilisateur)) {
-            $this->id_utilisateur[] = $idUtilisateur;
-            $idUtilisateur->setEvenement($this);
-        }
-
-        return $this;
-    }
-
-    public function removeIdUtilisateur(Utilisateur $idUtilisateur): self
-    {
-        if ($this->id_utilisateur->removeElement($idUtilisateur)) {
-            // set the owning side to null (unless already changed)
-            if ($idUtilisateur->getEvenement() === $this) {
-                $idUtilisateur->setEvenement(null);
-            }
-        }
-
-        return $this;
-    }
 
     /**
      * @return Collection<int, Appreciation>

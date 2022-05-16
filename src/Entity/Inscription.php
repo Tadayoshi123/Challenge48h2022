@@ -2,10 +2,11 @@
 
 namespace App\Entity;
 
-use App\Repository\InscriptionRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use App\Entity\Utilisateur;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\InscriptionRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 
 #[ORM\Entity(repositoryClass: InscriptionRepository::class)]
 class Inscription
@@ -23,7 +24,6 @@ class Inscription
     private $id_evenement;
 
     #[ORM\OneToOne(targetEntity: Utilisateur::class, cascade: ['persist', 'remove'])]
-    #[ORM\JoinColumn(nullable: false)]
     private $id_utilisateur;
 
     public function __construct()
@@ -34,36 +34,6 @@ class Inscription
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    /**
-     * @return Collection<int, Utilisateur>
-     */
-    public function getIdUtilisateur(): Collection
-    {
-        return $this->id_utilisateur;
-    }
-
-    public function addIdUtilisateur(Utilisateur $idUtilisateur): self
-    {
-        if (!$this->id_utilisateur->contains($idUtilisateur)) {
-            $this->id_utilisateur[] = $idUtilisateur;
-            $idUtilisateur->setInscription($this);
-        }
-
-        return $this;
-    }
-
-    public function removeIdUtilisateur(Utilisateur $idUtilisateur): self
-    {
-        if ($this->id_utilisateur->removeElement($idUtilisateur)) {
-            // set the owning side to null (unless already changed)
-            if ($idUtilisateur->getInscription() === $this) {
-                $idUtilisateur->setInscription(null);
-            }
-        }
-
-        return $this;
     }
 
     public function getDateInscription(): ?\DateTimeInterface
@@ -90,7 +60,12 @@ class Inscription
         return $this;
     }
 
-    public function setIdUtilisateur(Utilisateur $id_utilisateur): self
+    public function getIdUtilisateur(): Collection
+    {
+        return $this->id_utilisateur;
+    }
+
+    public function setIdUtilisateur(?Utilisateur $id_utilisateur): self
     {
         $this->id_utilisateur = $id_utilisateur;
 
