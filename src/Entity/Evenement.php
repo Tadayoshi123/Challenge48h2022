@@ -37,6 +37,9 @@ class Evenement
     #[ORM\OneToMany(mappedBy: 'id_evenement', targetEntity: Appreciation::class)]
     private $appreciations;
 
+    #[ORM\Column(type: 'string', length: 255)]
+    private $image;
+
     public function __construct()
     {
         $this->id_utilisateur = new ArrayCollection();
@@ -147,6 +150,18 @@ class Evenement
                 $appreciation->setIdEvenement(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(string $image): self
+    {
+        $this->image = $image;
 
         return $this;
     }
