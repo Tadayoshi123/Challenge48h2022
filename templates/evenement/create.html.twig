@@ -1,0 +1,60 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+	<h1>
+		{% if editMode %}
+			Edition de l'article
+		{% else %}
+			Création d'un article
+		{% endif %}
+	</h1>
+	{{ form_start(formEvenement) }}
+
+	{{ form_row(formEvenement.nom, {
+        'label':'Nom',
+        'attr': {
+            'placeholder': "Nom de l'évènement"
+        }
+    }) }}
+
+	{{ form_row(formEvenement.description, {
+        'label':'Contenu',
+        'attr': {
+            'placeholder': "Description du évènement"
+        }
+    }) }}
+
+	{{ form_row(formEvenement.image, {
+		'label':"Choisissez une image",
+		'attr': {
+			'placeholder': "Ajoutez le lien de l'image"
+		}
+	}) }}
+
+	{{ form_row(formEvenement.id_categorie, {
+        'label': "Catégorie"
+    }) }}
+
+	{{ form_row(formEvenement.date_debut , {
+		'label': "Date de début"
+	})}}
+
+	{{ form_row(formEvenement.date_fin , {
+		'label': "Date de fin"
+	})}}
+
+	{{ form_row(formEvenement.ville , {
+		'label': "Ville"
+	})}}
+
+	<button type="submit" class="btn btn-primary">
+		{% if editMode %}
+			Enregistrer les modifications
+		{% else %}
+			Ajouter l'évènement
+		{% endif %}
+	</button>
+
+	{{ form_end(formEvenement) }}
+
+{% endblock %}

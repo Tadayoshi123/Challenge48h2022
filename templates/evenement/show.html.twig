@@ -1,0 +1,53 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+	<br>
+	<br>
+	<h1>
+		Détail de l'évènement
+	</h1>
+	<section>
+		<section class="produits">
+			<article class="container-lg">
+				<div class="row">
+					<div class="col-lg">
+						<br>
+						<br>
+						<br>
+
+						<img src="{{ evenement.image }}" alt="" class="img-fluid" style="max-width:50vw;max-height:50vh">
+					</div>
+					<div class="col-sm">
+						<br>
+						<br>
+						<br>
+
+
+						<h2>
+							Titre de l'évènement :
+							{{ evenement.nom }}</h2>
+						<div class="metadata">
+
+							Catégorie :
+							{{ evenement.idcategorie.nomcategorie }}</div>
+						<div class="content">
+							<hr>
+							Description :
+							{{ evenement.description |raw}}
+						</div>
+						<hr>
+						<h2>Début de l'évènement :
+
+							{{ evenement.datedebut |date('D,d M Y  H:i')}}
+							Fin de l'évènement :
+							{{ evenement.datefin |date('D,d M Y  H:i') }}
+						</h2>
+						{# <a href="{{ path('panier_add', {id: produit.id }) }}" class="btn btn-danger">Ajouter au panier</a> #}
+						Fait par :
+
+
+					</div>
+				</div>
+			</article>
+		</section>
+	{% endblock %}

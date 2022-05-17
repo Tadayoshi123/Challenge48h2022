@@ -42,7 +42,7 @@ class RegistrationFormType extends AbstractType
                 'roles',
                 ChoiceType::class,
                 [
-                    'choices' => ['ROLE_PARTICIPANT' => 'ROLE_PARTICIPANT', 'ROLE_ORGANISATEUR' => 'ROLE_ORGANISATEUR'],
+                    'choices' => ['ROLE_PARTICIPANT' => 'ROLE_PARTICIPANT', 'ROLE_ORGANISATEUR' => 'ROLE_ORGANISATEUR', 'ROLE_ADMIN' => 'ROLE_ADMIN'],
                     'expanded' => false,
                     'multiple' => true,
                 ]

@@ -32,6 +32,9 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'string', length: 30)]
     private $prenom;
 
+    #[ORM\ManyToOne(targetEntity: Evenement::class, inversedBy: 'id_utilisateur')]
+    private $evenement;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -143,5 +146,22 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
         $this->prenom = $prenom;
 
         return $this;
+    }
+
+    public function getEvenement(): ?Evenement
+    {
+        return $this->evenement;
+    }
+
+    public function setEvenement(?Evenement $evenement): self
+    {
+        $this->evenement = $evenement;
+
+        return $this;
+    }
+
+    public function __toString(): string
+    {
+        return $this->nom;
     }
 }

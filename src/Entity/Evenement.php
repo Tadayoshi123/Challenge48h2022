@@ -40,6 +40,9 @@ class Evenement
     #[ORM\Column(type: 'string', length: 255)]
     private $image;
 
+    #[ORM\OneToMany(mappedBy: 'evenement', targetEntity: Utilisateur::class)]
+    private $id_utilisateur;
+
     public function __construct()
     {
         $this->id_utilisateur = new ArrayCollection();
@@ -164,5 +167,40 @@ class Evenement
         $this->image = $image;
 
         return $this;
+    }
+
+    /**
+     * @return Collection<int, Utilisateur>
+     */
+    public function getIdUtilisateur(): Collection
+    {
+        return $this->id_utilisateur;
+    }
+
+    public function addIdUtilisateur(Utilisateur $idUtilisateur): self
+    {
+        if (!$this->id_utilisateur->contains($idUtilisateur)) {
+            $this->id_utilisateur[] = $idUtilisateur;
+            $idUtilisateur->setEvenement($this);
+        }
+
+        return $this;
+    }
+
+    public function removeIdUtilisateur(Utilisateur $idUtilisateur): self
+    {
+        if ($this->id_utilisateur->removeElement($idUtilisateur)) {
+            // set the owning side to null (unless already changed)
+            if ($idUtilisateur->getEvenement() === $this) {
+                $idUtilisateur->setEvenement(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function __toString():string
+    {
+        return $this->nom;
     }
 }

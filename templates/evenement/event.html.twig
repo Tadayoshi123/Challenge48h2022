@@ -1,30 +1,45 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Page d'accueil ?
+{% block title %}Liste des évènements
 {% endblock %}
 
 {% block body %}
+
+	<br>
+	<br>
+
+
+	<h1>
+		Liste des évènement
+	</h1>
+
+	<br>
+	<br>
 	{{ form_start(formRecherche) }}
 	{{ form_widget(formRecherche.recherche, {
             'attr': {
                 'placeholder' : "Rechercher un évènement"
             	}
         	}) }}
+
 	<button type="submit" class="btn btn-danger mt-2">Recherche</button>
 	{{ form_end(formRecherche)}}
 	<div class="row mt-3">
 		{% for evenement in evenement |sort((a,b) => a.nom <=> b.nom)  %}
-			<div class="card mb-3" style="max-width: 44%;">
+			<div class="card mb-3" style="max-width: 75%;">
 				<div class="row no-gutters">
 					<div class="col-md-4">
-						<img src="https://cdn.futura-sciences.com/buildsv6/images/wide1920/a/0/f/a0fc73919d_50166390_chaton.jpg" style="width: 17rem;">
+						<img src="{{evenement.image}}" style="width: 20rem;">
 					</div>
 					<div class="col-md-8">
 						<div class="card-body">
-							<h5 class="card-title">Card title</h5>
-							<p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+							<h5 class="card-title">{{evenement.nom}}</h5>
+							<p class="card-text">{{ evenement.idcategorie.nomcategorie }}</p>
+							<p class="card-text">
+								{{ evenement.description |raw}}
+							</p>
 							<a href="{{ path('app_show', {'id': evenement.id}) }}" class="btn btn-primary">
-								Voir Evenement
+								Participer à l'évènement
 							</a>
 						</div>
 					</div>
